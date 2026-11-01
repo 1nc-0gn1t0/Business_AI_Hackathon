@@ -1,0 +1,473 @@
+.vi-dock {
+  position: fixed;
+  z-index: 20;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: vi-arrive 0.4s 0.25s both;
+}
+.promo-bubble,
+.vi-floating {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.promo-bubble {
+  background: #eef0f4;
+  color: #687282;
+}
+.promo-bubble svg {
+  width: 24px;
+  height: 24px;
+}
+.vi-floating {
+  position: relative;
+  background: #f5fbff;
+  border: 1px solid #b7dcff;
+  padding: 0;
+  box-shadow: 0 5px 22px #073d7726;
+  transition: transform 0.18s;
+}
+.vi-floating:active {
+  transform: scale(0.96);
+}
+.vi-floating > .vi-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.vi-tooltip {
+  position: absolute;
+  right: calc(100% + 14px);
+  white-space: nowrap;
+  color: #173355;
+  background: white;
+  box-shadow: 0 3px 20px #12396a15;
+  border-radius: 12px;
+  padding: 8px 13px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.vi-floating:focus-visible .vi-tooltip {
+  opacity: 1;
+}
+@media (hover: hover) {
+  .vi-floating:hover {
+    transform: scale(1.04);
+  }
+  .vi-floating:hover .vi-tooltip {
+    opacity: 1;
+  }
+}
+.vi-avatar {
+  display: block;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+.vi-rig {
+  overflow: visible;
+}
+.vi-portrait {
+  overflow: hidden;
+}
+.vi-rig g {
+  transform-box: fill-box;
+}
+.vi-rig-character {
+  transform-origin: 52.7% 95.5%;
+}
+.vi-rig-hand {
+  transform-origin: 88% 81%;
+}
+.vi-rig-plume1 {
+  transform-origin: 22% 106%;
+}
+.vi-rig-plume2 {
+  transform-origin: 25% 105%;
+}
+.vi-rig-plume3 {
+  transform-origin: 14% 36%;
+}
+.vi-rig-eye_left {
+  transform-origin: 50% 50%;
+}
+.vi-rig-eye_right {
+  transform-origin: 50% 50%;
+}
+.vi-motion-greeting .vi-rig-character {
+  animation: vi-greet-body 1.8s cubic-bezier(0.3, 0.1, 0.2, 1) 1;
+}
+.vi-motion-greeting .vi-rig-hand {
+  animation: vi-wave 1.8s ease-in-out 1;
+}
+.vi-motion-greeting .vi-rig-plume1 {
+  animation: vi-feather 1.8s ease-in-out 1;
+}
+.vi-motion-greeting .vi-rig-plume2 {
+  animation: vi-feather 1.8s 0.04s ease-in-out 1;
+}
+.vi-motion-greeting .vi-rig-plume3 {
+  animation: vi-feather 1.8s 0.08s ease-in-out 1;
+}
+.vi-rig-eye_left,
+.vi-rig-eye_right {
+  animation: vi-blink 10s 3;
+}
+.vi-motion-greeting .vi-rig-eye_left,
+.vi-motion-greeting .vi-rig-eye_right {
+  animation:
+    vi-greet-blink 1.8s 1,
+    vi-blink 10s 1.8s 3;
+}
+.vi-motion-idle .vi-rig-character {
+  animation: vi-breathe 6s 2;
+}
+.vi-motion-idle .vi-rig-plume1,
+.vi-motion-idle .vi-rig-plume2,
+.vi-motion-idle .vi-rig-plume3 {
+  animation: vi-feather-rest 14s 3;
+}
+img.vi-motion-thinking {
+  animation: vi-think 3.6s ease-in-out 2;
+}
+img.vi-motion-searching {
+  animation: vi-search 2.4s ease-in-out 2;
+}
+img.vi-motion-idea {
+  animation: vi-nod 0.9s ease-out 1;
+}
+img.vi-motion-success {
+  animation: vi-hop 1.2s ease-out 1;
+}
+img.vi-motion-error {
+  animation: vi-soft 0.6s ease-out 1;
+}
+.vi-motion-none,
+.vi-motion-none * {
+  animation: none !important;
+}
+.vi-welcome {
+  position: fixed;
+  inset: auto 106px 24px auto;
+  width: min(360px, calc(100vw - 36px));
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  padding: 26px 30px 30px;
+  margin: 0;
+  border: 1px solid #e5effa;
+  border-radius: 30px;
+  color: #122c51;
+  box-shadow: 0 16px 70px #12396a30;
+  text-align: center;
+  animation: vi-arrive 0.2s ease-out;
+}
+.vi-welcome::backdrop {
+  background: #102e5c15;
+}
+.vi-welcome > .vi-avatar {
+  margin: 0 auto 10px;
+  width: 205px;
+  height: 220px;
+}
+.vi-welcome h2 {
+  font-size: 26px;
+  line-height: 1.25;
+  margin: 4px 0 12px;
+}
+.vi-welcome p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+.vi-welcome .button {
+  width: 100%;
+}
+.vi-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 28px;
+  color: #526984;
+}
+.vi-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 18px;
+  font-size: 14px;
+  color: #415d7d;
+  min-height: 64px;
+}
+.vi-status p {
+  margin: 0;
+}
+.vi-status .vi-avatar {
+  width: 64px;
+  height: 64px;
+}
+.vi-chat {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 8px 10px;
+  font-size: 12px;
+  color: #526984;
+}
+.vi-chat .vi-avatar {
+  width: 44px;
+  height: 44px;
+}
+.vi-inline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.vi-inline .vi-avatar {
+  width: 52px;
+  height: 52px;
+}
+.vi-intro {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+@keyframes vi-arrive {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes vi-wave {
+  0%,
+  12%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -12deg;
+  }
+  38% {
+    rotate: 7deg;
+  }
+  51% {
+    rotate: -10deg;
+  }
+  64% {
+    rotate: 6deg;
+  }
+  76% {
+    rotate: -8deg;
+  }
+  90% {
+    rotate: 2deg;
+  }
+}
+@keyframes vi-greet-body {
+  0%,
+  100% {
+    rotate: 0deg;
+    translate: 0 0;
+  }
+  25% {
+    rotate: -1.8deg;
+    translate: 0 -3px;
+  }
+  70% {
+    rotate: -0.6deg;
+    translate: 0 -2px;
+  }
+}
+@keyframes vi-feather {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  30% {
+    rotate: 3deg;
+  }
+  50% {
+    rotate: -2deg;
+  }
+  70% {
+    rotate: 1.2deg;
+  }
+}
+@keyframes vi-blink {
+  0%,
+  92%,
+  97%,
+  100% {
+    scale: 1 1;
+  }
+  94% {
+    scale: 1 0.08;
+  }
+}
+@keyframes vi-greet-blink {
+  0%,
+  12%,
+  23%,
+  100% {
+    scale: 1 1;
+  }
+  17% {
+    scale: 1 0.08;
+  }
+}
+@keyframes vi-breathe {
+  0%,
+  100% {
+    scale: 1 1;
+  }
+  50% {
+    scale: 1 1.004;
+  }
+}
+@keyframes vi-feather-rest {
+  0%,
+  86%,
+  100% {
+    rotate: 0deg;
+  }
+  91% {
+    rotate: 1.4deg;
+  }
+  96% {
+    rotate: -0.6deg;
+  }
+}
+@keyframes vi-think {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  40% {
+    rotate: -2deg;
+    translate: 0 -1px;
+  }
+  70% {
+    rotate: -1deg;
+  }
+}
+@keyframes vi-search {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  35% {
+    translate: 2px -1px;
+    rotate: 2deg;
+  }
+  70% {
+    translate: -1px 0;
+    rotate: -1deg;
+  }
+}
+@keyframes vi-nod {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  40% {
+    translate: 0 -3px;
+    rotate: 3deg;
+  }
+  70% {
+    rotate: -1deg;
+  }
+}
+@keyframes vi-hop {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  28% {
+    translate: 0 -7px;
+    rotate: -3deg;
+  }
+  54% {
+    translate: 0 1px;
+    rotate: 1deg;
+  }
+  76% {
+    translate: 0 -2px;
+  }
+}
+@keyframes vi-soft {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  45% {
+    rotate: -1.5deg;
+  }
+}
+@media (max-width: 600px) {
+  .vi-dock {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    gap: 9px;
+  }
+  .promo-bubble,
+  .vi-floating {
+    width: 54px;
+    height: 54px;
+  }
+  .vi-floating > .vi-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .vi-welcome {
+    inset: auto 16px max(84px, calc(env(safe-area-inset-bottom) + 76px)) auto;
+    max-height: calc(100dvh - 110px);
+    padding: 25px;
+  }
+  .vi-welcome > .vi-avatar {
+    width: 165px;
+    height: 176px;
+  }
+  .vi-status {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .vi-status .vi-avatar {
+    width: 54px;
+    height: 54px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vi-avatar,
+  .vi-avatar *,
+  .vi-dock,
+  .vi-welcome {
+    animation: none !important;
+    transition: none !important;
+  }
+  .vi-floating,
+  .vi-tooltip {
+    transition: none;
+  }
+  .vi-floating:hover,
+  .vi-floating:active {
+    transform: none;
+  }
+}

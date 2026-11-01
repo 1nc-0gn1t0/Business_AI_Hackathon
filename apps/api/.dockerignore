@@ -1,0 +1,16 @@
+.venv
+__pycache__
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.git
+.env
+.env.*
+.pypirc
+pip.conf
+*.key
+*.pem
+*.age
+*.dump
+*.backup
+*.log

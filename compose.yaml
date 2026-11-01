@@ -1,0 +1,110 @@
+name: business-ai
+
+services:
+  db:
+    # Existing legacy PGDATA is refused by the entrypoint; use NEW project/volume
+    # and encrypted dump/restore (docs/CONTAINER_UPGRADE.md), never an in-place up.
+    image: business-ai-postgis-hardened
+    build:
+      context: ./infra/docker
+      dockerfile: postgis.Dockerfile
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-business_ai}
+      POSTGRES_USER: ${POSTGRES_USER:-business_ai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  migrate:
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    build:
+      context: ./apps/api
+    command: ["alembic", "upgrade", "head"]
+    environment: &database-environment
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: ${POSTGRES_DB:-business_ai}
+      PGUSER: ${POSTGRES_USER:-business_ai}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    logging: &bounded-logs
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    build:
+      context: ./apps/api
+    environment:
+      <<: *database-environment
+      LLM_PROVIDER: ${LLM_PROVIDER:-ollama}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:4b-instruct-2507-q4_K_M}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS:-120}
+      OLLAMA_NUM_CTX: ${OLLAMA_NUM_CTX:-4096}
+      DATA_DEMO_ENABLED: ${DATA_DEMO_ENABLED:-false}
+      BA_API_LIMITS_JSON: ${BA_API_LIMITS_JSON:-}
+      BA_AGENT_ENABLED: ${BA_AGENT_ENABLED:-0}
+      BA_INDUSTRY_ENABLED: ${BA_INDUSTRY_ENABLED:-0}
+      BA_FINANCE_V2_ENABLED: ${BA_FINANCE_V2_ENABLED:-0}
+      BA_AGENT_LIMITS_JSON: ${BA_AGENT_LIMITS_JSON:-}
+      BA_DIAGNOSTICS_TOKEN: ${BA_DIAGNOSTICS_TOKEN:-}
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/readyz', timeout=5)"]
+      interval: 5s
+      timeout: 6s
+      retries: 10
+      start_period: 5s
+
+  web:
+    logging: *bounded-logs
+    build:
+      context: ./apps/web
+      dockerfile: ../../infra/docker/web.Dockerfile
+    ports:
+      - "127.0.0.1:${WEB_PORT:-5173}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  db-tests:
+    profiles: [test]
+    build:
+      context: ./apps/api
+      target: integration-tests
+    environment:
+      <<: *database-environment
+      BA_RUN_DB_TESTS: "1"
+      LLM_PROVIDER: stub
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_data:

@@ -1,0 +1,348 @@
+@media (min-width: 1600px) {
+  .idea-screen {
+    margin-top: 30px;
+  }
+  .map-canvas {
+    height: 600px;
+  }
+}
+@media (max-width: 1000px) {
+  .flow-header {
+    padding-inline: 32px;
+    height: 80px;
+  }
+  .flow-main {
+    padding: 24px 32px 40px;
+  }
+  .stage-idea {
+    padding-bottom: 100px;
+  }
+  .stage-chat {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .location-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .map-canvas {
+    height: 420px;
+  }
+  .zone-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: none;
+  }
+  .scenario-card {
+    padding: 22px;
+  }
+  .scenario-card > strong {
+    font-size: 25px;
+  }
+  .bank-product-grid {
+    grid-template-columns: 1fr;
+  }
+  .input-columns {
+    gap: 18px;
+  }
+  .chat-screen {
+    height: calc(100dvh - 200px);
+  }
+  .summary-list dd {
+    max-width: 58%;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    font-size: 15px;
+  }
+  .flow-header {
+    height: 72px;
+    padding: 0 22px;
+    gap: 12px;
+  }
+  .wordmark {
+    font-size: 21px;
+  }
+  .new-conversation {
+    margin-left: 0;
+    font-size: 11px;
+  }
+  .progress {
+    font-size: 11px;
+  }
+  .flow-main {
+    padding: 18px 22px 32px;
+  }
+  .flow-footer {
+    font-size: 10px;
+    padding: 16px 22px;
+  }
+  .stage-idea {
+    padding: 16px 22px 100px;
+  }
+  .idea-screen h1 {
+    font-size: 42px;
+    letter-spacing: -1.7px;
+  }
+  .idea-composer {
+    margin-top: 32px;
+    padding: 18px;
+    border-radius: 24px;
+    display: block;
+  }
+  .idea-composer textarea {
+    font-size: 16px;
+    min-height: 108px;
+  }
+  .idea-composer .button {
+    width: 100%;
+    margin-top: 16px;
+    min-height: 52px;
+  }
+  .back-button {
+    margin-bottom: 20px;
+  }
+  .section-heading {
+    margin-bottom: 26px;
+  }
+  .section-heading h1 {
+    font-size: 37px;
+    letter-spacing: -1.4px;
+  }
+  .section-heading p {
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  .stage-chat {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .stage-chat .back-button {
+    margin-bottom: 0;
+  }
+  .chat-screen {
+    height: calc(100dvh - 190px);
+    min-height: 390px;
+  }
+  .message p {
+    font-size: 16px;
+  }
+  .message.user {
+    max-width: 93%;
+    padding: 14px 17px;
+  }
+  .message.assistant {
+    margin-right: 0;
+  }
+  .composer {
+    padding: 12px;
+    border-radius: 22px;
+  }
+  .composer textarea {
+    font-size: 16px;
+    padding: 4px;
+  }
+  .send-button {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+  }
+  .chat-meta {
+    gap: 12px;
+    font-size: 11px;
+  }
+  .consent-dialog {
+    padding: 26px;
+  }
+  .consent-dialog h2 {
+    font-size: 27px;
+  }
+  .review-screen {
+    margin: 32px auto;
+  }
+  .review-screen h1 {
+    font-size: 43px;
+  }
+  .project-title {
+    margin-top: 32px;
+  }
+  .project-title h2 {
+    font-size: 30px;
+  }
+  .project-title p {
+    font-size: 19px;
+  }
+  .profile-form {
+    grid-template-columns: 1fr;
+  }
+  .profile-form > .button {
+    width: 100%;
+  }
+  .review-screen .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .review-screen .actions > .button {
+    width: 100%;
+  }
+  .location-toolbar {
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+  }
+  .location-toolbar .button {
+    width: 100%;
+  }
+  .map-canvas {
+    height: 370px;
+  }
+  .map-wrap {
+    border-radius: 20px;
+  }
+  .map-legend {
+    font-size: 10px;
+    gap: 10px;
+  }
+  .zone-list {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .zone-card {
+    padding: 16px;
+  }
+  .zone-card h2 {
+    font-size: 17px;
+  }
+  .metrics-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .step-action .button {
+    width: 100%;
+  }
+  .quick-assumptions {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .input-columns,
+  .scenario-inputs,
+  .bank-needs-grid,
+  .lead-columns {
+    grid-template-columns: 1fr;
+  }
+  .capital-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .capital-grid strong {
+    font-size: 30px;
+  }
+  .capital-grid > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+  .capital-grid small {
+    max-width: 45%;
+    font-size: 12px;
+  }
+  .capital-grid strong {
+    margin: 0;
+    font-size: 25px;
+  }
+  .scenario-results {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .scenario-card {
+    padding: 23px;
+  }
+  .scenario-card > strong {
+    font-size: 34px;
+  }
+  .scenario-card details {
+    margin: 10px 0 0;
+  }
+  .chart-row {
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 12px;
+    font-size: 11px;
+  }
+  .chart-row strong {
+    grid-column: 2;
+    font-size: 12px;
+  }
+  .model-note {
+    font-size: 12px;
+  }
+  .bank-question {
+    margin: 32px 0;
+  }
+  .bank-question h2 {
+    font-size: 27px;
+  }
+  .answer-options {
+    gap: 10px;
+  }
+  .answer-button {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  .bank-product-card {
+    padding: 24px;
+  }
+  .summary-screen {
+    margin-top: 12px;
+  }
+  .summary-screen h1 {
+    font-size: 39px;
+  }
+  .summary-intro {
+    font-size: 18px;
+  }
+  .summary-list > div {
+    display: block;
+    padding: 18px 0;
+  }
+  .summary-list dd {
+    max-width: none;
+    text-align: left;
+    margin-top: 9px;
+    font-size: 20px;
+  }
+  .summary-list dt {
+    font-size: 12px;
+  }
+  .report-actions {
+    gap: 14px;
+  }
+  .report-actions .button {
+    width: 100%;
+  }
+  .lead-card {
+    padding: 20px;
+  }
+  .consent-row {
+    display: block;
+  }
+  .consent-row .button {
+    margin-top: 12px;
+  }
+  .consent-row .row {
+    gap: 12px;
+  }
+  .calculation-controls .button {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
